@@ -25,8 +25,6 @@ const publicDirectoryPath = path.join(__dirname, "../public");
 app.use(express.static(publicDirectoryPath));
 
 io.on("connection", (socket) => {
-    console.log("New WebSocket connection");
-
     socket.on("join", ({ username, room }, callback) => {
         const { error, user } = addUser({ id: socket.id, username, room });
 
@@ -49,9 +47,6 @@ io.on("connection", (socket) => {
         });
 
         callback();
-
-        // socket.emit, io.emit, socket.broadcast.emit
-        // io.to.emit, socket.broadcast.to.emit
     });
 
     socket.on("sendMessage", (message, callback) => {
